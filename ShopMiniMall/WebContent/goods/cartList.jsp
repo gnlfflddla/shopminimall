@@ -4,10 +4,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	List<CartDTO> list = (List<CartDTO>)session.getAttribute("cartList");
-	
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -65,8 +63,7 @@
 	    
 	    
 	  
-<%
-for(CartDTO dto : list){ %>
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		function total(){
@@ -135,52 +132,52 @@ for(CartDTO dto : list){ %>
 	});
 	
 </script>
-	
+<c:forEach var="c" items="${cartList}" varStatus="status">
 		
-		<input type="text" name="num<%=dto.getNum() %>>" value="<%=dto.getNum() %>" id="num<%=dto.getNum() %>">
-		<input type="text" name="gImage<%=dto.getNum() %>" value="<%=dto.getgImage() %>" id="gImage<%=dto.getNum() %>">
-		<input type="text" name="gName<%=dto.getNum() %>" value="<%=dto.getgName() %>" id="gName<%=dto.getNum() %>">
-		<input type="text" name="gSize<%=dto.getNum() %>" value="<%=dto.getgSize() %>" id="gSize<%=dto.getNum() %>">
-		<input type="text" name="gColor<%=dto.getNum() %>" value="<%=dto.getgColor() %>" id="gColor<%=dto.getNum() %>"> 
-		<input type="text" name="gPrice<%=dto.getNum() %>" value="<%=dto.getgPrice() %>" id="gPrice<%=dto.getNum() %>"><br>
+		<input type="text" name="num${c.num}" value="${c.num}" id="num${c.num}">
+		<input type="text" name="gImage${c.num}" value="${c.gImage}" id="gImage${c.num}">
+		<input type="text" name="gName${c.num}" value="${c.gName}" id="gName${c.num}">
+		<input type="text" name="gSize${c.num}" value="${c.gSize}" id="gSize${c.num}">
+		<input type="text" name="gColor${c.num}" value="${c.gColor}" id="gColor${c.num}"> 
+		<input type="text" name="gPrice${c.num}" value="${c.gPrice}" id="gPrice${c.num}"><br>
 
 		<tr>
 			<td class="td_default" width="80">
 			<!-- checkbox는 체크된 값만 서블릿으로 넘어간다. 따라서 value에 삭제할 num값을 설정한다. -->
 			<input type="checkbox"
-				name="check" id="check<%=dto.getNum() %>" class="check" value="<%=dto.getNum() %>"></td>
-			<td class="td_default" width="80"><%=dto.getNum() %></td>
+				name="check" id="check${c.num}" class="check" value="${c.num}"></td>
+			<td class="td_default" width="80">${c.num}</td>
 			<td class="td_default" width="80"><img
-				src="images/items/<%=dto.getgImage() %>.gif" border="0" align="center"
+				src="images/items/${c.gImage}.gif" border="0" align="center"
 				width="80" /></td>
-			<td class="td_default" width="300" style='padding-left: 30px'><%=dto.getgName() %>
-				<br> <font size="2" color="#665b5f">[옵션 : 사이즈(<%=dto.getgSize() %>)
-					, 색상(<%=dto.getgColor() %>)]
+			<td class="td_default" width="300" style='padding-left: 30px'>${c.gName}
+				<br> <font size="2" color="#665b5f">[옵션 : 사이즈(${c.gSize})
+					, 색상(${c.gColor})]
 			</font></td>
 			<td class="td_default" align="center" width="110">
-			<%=dto.getgPrice() %>
+			${c.gPrice}
 
 
 			</td>
 			<td class="td_default" align="center" width="90"><input
 				class="input_default" type="text" name="CART_AMOUNT"
-				id="CART_AMOUNT<%=dto.getNum() %>" style="text-align: right" maxlength="3"
-				size="2" value="<%=dto.getgAmount()%>"></input></td>
-			<td><input type="button" value="수정" class="modBtn" data-Modified="<%=dto.getNum()%>"></td>
+				id="CART_AMOUNT${c.num}" style="text-align: right" maxlength="3"
+				size="2" value="${c.gAmount}"></input></td>
+			<td><input type="button" value="수정" class="modBtn" data-Modified="${c.num}"></td>
 			<td class="td_default" align="center" width="80"
-				style='padding-left: 5px'><span id="sum<%=dto.getNum() %>" class="sum">
-				<%=dto.getgAmount()*dto.getgPrice() %>
+				style='padding-left: 5px'><span id="sum${c.num}" class="sum">
+				${c.gPrice*c.gAmount}
 				</span></td>
 			<td><input type="button" value="주문"
-				class="orderBtn" data-ooo="<%=dto.getNum()%>"></td>
+				class="orderBtn" data-ooo="${c.num}"></td>
 			<td class="td_default" align="center" width="30"
 				style='padding-left: 10px'><input type="button" value="삭제" 
-				class="delBtn" data-xxx="<%=dto.getNum()%>">
+				class="delBtn" data-xxx="${c.num}">
 			</td>
 			<td height="10"></td>
 		</tr>
 
- <%} %>
+</c:forEach>
 
 	</form>
 	<tr>

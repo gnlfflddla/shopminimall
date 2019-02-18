@@ -2,19 +2,10 @@
 <%@page import="com.dto.CartDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	
-<%
-	CartDTO dto = (CartDTO)request.getAttribute("cDTO");
-	String gcode = dto.getgCode();
-	String gcolor = dto.getgColor();
-	String gimage = dto.getgImage();
-	String gname = dto.getgName();
-	String gsize = dto.getgSize();
-	String userid = dto.getUserid();
-	int gamount = dto.getgAmount();
-	int gprice = dto.getgPrice();
-	int num = dto.getNum();
-%>
+
+
 <form name="myForm" method="get" action="CartOrderDoneServlet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -40,15 +31,16 @@ $(document).ready(function(){
 
 });
 </script>
+<c:set var="c" value="${cDTO}"></c:set>
 	<table width="80%" cellspacing="0" cellpadding="0">
-		<input type="hidden" name="gcode" value=<%=gcode %>>
-		<input type="hidden" name="gcolor" value=<%=gcolor %>>
-		<input type="hidden" name="gimage" value=<%=gimage %>>
-		<input type="hidden" name="gname" value=<%=gname %>>
-		<input type="hidden" name="gsize" value=<%=gsize %>>
-		<input type="hidden" name="num" value=<%=num %>>
-		<input type="hidden" name="gamount" value=<%=gamount %>>
-		<input type="hidden" name="gprice" value=<%=gprice %>>
+		<input type="hidden" name="gcode" value="${c.gCode}">
+		<input type="hidden" name="gcolor" value="${c.gColor}">
+		<input type="hidden" name="gimage" value="${c.gImage}">
+		<input type="hidden" name="gname" value="${c.gName}">
+		<input type="hidden" name="gsize" value="${c.gSize}">
+		<input type="hidden" name="num" value="${c.num}">
+		<input type="hidden" name="gamount" value="${c.gAmount}">
+		<input type="hidden" name="gprice" value="${c.gPrice}">
 
 		<tr>
 			<td height="30">
@@ -90,17 +82,17 @@ $(document).ready(function(){
 					</tr>
 
 					<tr>
-						<td class="td_default" width="80"><%=dto.getNum() %></td>
+						<td class="td_default" width="80">${c.num}</td>
 						<td class="td_default" width="80"><img
-							src="images/items/<%=dto.getgImage() %>.gif" border="0" align="center"
+							src="images/items/${c.gImage}.gif" border="0" align="center"
 							width="80" /></td>
-						<td class="td_default" width="300" style='padding-left: 30px'><%=dto.getgName() %>
-							<br> <font size="2" color="#665b5f">[옵션 : 사이즈(<%=dto.getgSize() %>)
-								, 색상(<%=dto.getgColor() %>)]
+						<td class="td_default" width="300" style='padding-left: 30px'>${c.gName}
+							<br> <font size="2" color="#665b5f">[옵션 : 사이즈(${c.gSize})
+								, 색상(${c.gColor})]
 						</font></td>
-						<td class="td_default" align="center" width="110"><%=dto.getgPrice() %>
+						<td class="td_default" align="center" width="110">${c.gPrice}
 						</td>
-						<td class="td_default" align="center" width="90"><%=dto.getgAmount() %></td>
+						<td class="td_default" align="center" width="90">${c.gAmount}</td>
 
 					</tr>
 
@@ -108,7 +100,7 @@ $(document).ready(function(){
 					<tr>
 						<td height="30"></td>
 						<td class="td_default" align="right">총 결제 금액 :</td>
-						<td class="td_default" align='right'><%=dto.getgPrice()*dto.getgAmount() %>원</td>
+						<td class="td_default" align='right'>${c.gPrice*c.gAmount}원</td>
 					</tr>
 				</table> <tr>
 			<td>
@@ -131,11 +123,8 @@ $(document).ready(function(){
 		<td height="15">
 	
 		</tr>
-<%
-	MemberDTO member = (MemberDTO)request.getAttribute("mDTO");
 
-%>
-
+<c:set var="m" value="${mDTO}"></c:set>
 	<tr>
 		<td>
 			<table width="100%" cellspacing="0" cellpadding="0" border="1"
@@ -147,7 +136,7 @@ $(document).ready(function(){
 					</td>
 					<td height="35" class="td_default">
 						<input class="input_default" type="text" id="mname" size="20"
-							maxlength="20" value="<%=member.getUsername()%>"></input>
+							maxlength="20" value="${m.username}"></input>
 					</td>
 				</tr>
 				<tr>
@@ -157,7 +146,7 @@ $(document).ready(function(){
 					</td>
 					<td height="35" class="td_default">
 						<input class="input_default" type="text" id="mpost" size="5"
-							maxlength="5" value="<%=member.getPost()%>" readonly></input>
+							maxlength="5" value="${m.post}" readonly></input>
 					
 						
 					</td>
@@ -169,9 +158,9 @@ $(document).ready(function(){
 					</td>
 					<td height="35" class="td_default">
 						<input class="input_default" type="text" id="maddress1" size="35"
-							maxlength="200" value="<%=member.getAddr1()%>" readonly></input><br>
+							maxlength="200" value="${m.addr1}" readonly></input><br>
 						<input class="input_default" type="text" id="maddress2" size="35"
-							maxlength="200" value="<%=member.getAddr2()%>" readonly></input>
+							maxlength="200" value="${m.addr2}" readonly></input>
 					</td>
 				</tr>
 				
@@ -181,7 +170,7 @@ $(document).ready(function(){
 					</td>
 					<td height="35" class="td_default">
 						<input class="input_default" type="text" id="mphone" size="15"
-							maxlength="15" value="<%=member.getPhone1()+member.getPhone2()+member.getPhone3()%>"></input>
+							maxlength="15" value="${m.phone1+m.phone2+m.phone3}"></input>
 						
 					</td>
 				</tr>

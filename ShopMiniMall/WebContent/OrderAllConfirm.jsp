@@ -25,6 +25,6 @@
 <jsp:include page="common/top.jsp" flush="true"></jsp:include><br><!-- 로그인,회원가입 ,,  -->
 <jsp:include page="common/menu.jsp" flush="true"></jsp:include>
 <hr>
-<jsp:include page="order/orderAllConfirm2.jsp" flush="true"></jsp:include>
+<jsp:include page="order/orderAllConfirm3.jsp" flush="true"></jsp:include>
 </body>
 </html>

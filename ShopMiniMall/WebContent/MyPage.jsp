@@ -11,7 +11,7 @@
 <jsp:include page="common/top.jsp" flush="true"></jsp:include><br><!-- 로그인,회원가입 ,,  -->
 <jsp:include page="common/menu.jsp" flush="true"></jsp:include><br>
 <hr>
-<jsp:include page="member/mypage.jsp" flush="true"></jsp:include><br>
+<jsp:include page="member/mypage2.jsp" flush="true"></jsp:include><br>
 
 </body>
 </html>

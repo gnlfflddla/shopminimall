@@ -22,7 +22,7 @@ public class MemberDTO {
 		this.username = username;
 		this.phone1 = phone1;
 		this.phone2 = phone2;
-		this.phone3 = phone3;System.out.println("1");
+		this.phone3 = phone3;
 	}
 
 	

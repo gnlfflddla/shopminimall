@@ -1,7 +1,8 @@
 <%@page import="com.dto.OrderDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
 <%
 	OrderDTO dto = (OrderDTO)session.getAttribute("orderDTO");
 	String userid=dto.getUserid();
@@ -16,6 +17,7 @@
 	int gAmount = dto.getGamount();
 	String payMethod = dto.getPaymethod();
 %>
+<c:set val="o" value="${orderDTO}"></c:set>
 <table width="70%" cellspacing="0" cellpadding="0">
 
 	<tr>
@@ -39,7 +41,7 @@
 	</tr>
 
 	<tr>
-		<td class="td_default" align="center"><b><%=userid %></b> 님의 주문이
+		<td class="td_default" align="center"><b>${o.userid}</b> 님의 주문이
 			안전하게 처리되었습니다.</td>
 	</tr>
 
@@ -62,12 +64,12 @@
 				bordercolor="#CCCCCC">
 				<tr>
 					<td class="td_default" width="150" height="35"> 받으시는 분</td>
-					<td class="td_default" height="35"> <%=orderName %></td>
+					<td class="td_default" height="35"> ${o.orderName}</td>
 				</tr>
 				<tr>
 					<td class="td_default" height="35"> 주소</td>
-					<td class="td_default" height="35"> <%=post %><br>
-						<%=addr1+addr2 %>
+					<td class="td_default" height="35"> ${o.post}<br>
+						${o.gprice*o.gamount}
 					</td>
 				</tr>
 				
